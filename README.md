@@ -148,6 +148,33 @@ browser, can send a request to a local port. So the helper protects itself:
 
 `helper/check_server.py` tests these rules against the real helper.
 
+## What the mod runs and contacts
+
+**Programs it runs.** The mod and the helper run no shell, no model, no agent and no MCP tool. They run only these:
+
+| Program | Run by | Why |
+| --- | --- | --- |
+| `uv run --script helper/pointer_helper.py` | the mod, once per session | Starts the helper. `uv` installs the pinned packages. The mod looks for `uv` at the `uvPath` setting, then `~/.local/bin/uv`, then `/opt/homebrew/bin/uv` |
+| `screencapture -x -t png -R<x>,<y>,<w>,<h> <temporary file>` | the helper | Takes a screenshot only if the in-process screen grab fails. The temporary file is deleted at once |
+| `ps -o ppid= -p <pid>` | the helper, every 5 seconds | Checks that Claude Code is still running, so the helper can exit when it is gone |
+
+The mod reads one environment variable, `HOME`, to find `uv`. It writes none.
+
+**What it contacts.** The mod calls only the helper, at `http://127.0.0.1:<random port>` on your Mac. It sends the text of a
+prompt (up to 20 KB), the path of the folder for the files, the on/off and screenshot settings, and the secret token. The helper
+answers with text and file paths. Neither the mod nor the helper opens a connection to any other host. The one outside
+traffic is from `uv`, not from this plugin: on the first run it downloads the five pinned packages from PyPI
+(`pypi.org`, `files.pythonhosted.org`), and it downloads Python itself if the machine has no Python 3.12 or 3.13.
+
+**What each hook does with the calls it sees.**
+
+| Hook | What it does |
+| --- | --- |
+| `session.start` | Registers the `/look` command. If the mod was on last time, it starts the helper, switches it on, and sweeps old folders |
+| `command.run` for `/look` | Handles `/look on`, `/look off` and `/look status`. It sees no other command |
+| `prompt.submit` | Sees every prompt. It passes a prompt on unchanged unless the mod is on, the person typed or dictated it, and it contains a pointing word (or the filter is off). Then it sends the text to the helper and adds the text that comes back as extra context. It never edits your words and never blocks a prompt. If anything fails, the prompt goes on as it was |
+| `turn.complete` | After the main session answers, it deletes the folders of the prompt that was answered, and sweeps old ones. It sees answers from subagents and ignores them. It returns the result unchanged |
+
 ## Limits
 
 - The built-in dictation gives no word times, so each word gets an even share of the speech window. The mod snaps a
