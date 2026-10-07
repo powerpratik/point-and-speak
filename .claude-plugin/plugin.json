@@ -8,6 +8,7 @@
   "homepage": "https://github.com/powerpratik/point-and-speak",
   "repository": "https://github.com/powerpratik/point-and-speak",
   "license": "MIT",
+  "privacyPolicyUrl": "https://github.com/powerpratik/point-and-speak/blob/main/PRIVACY.md",
   "keywords": [
     "voice",
     "pointer",

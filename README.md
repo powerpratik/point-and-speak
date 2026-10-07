@@ -7,6 +7,8 @@ Dictate with Claude Code's built-in `/voice` (or type). Say things like *"look a
 The mod adds hidden context to your prompt: where the pointer was when you said each word, what was under it,
 and one small annotated screenshot. Then it deletes the files after the answer.
 
+[Privacy policy](PRIVACY.md) · [Security](SECURITY.md) · [License](LICENSE)
+
 It works over any app, not only the terminal. Keep the terminal focused and only **hover**. A click moves focus.
 
 ## Install
