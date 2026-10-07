@@ -11,6 +11,10 @@ and one small annotated screenshot. Then it deletes the files after the answer.
 
 It works over any app, not only the terminal. Keep the terminal focused and only **hover**. A click moves focus.
 
+<p align="center">
+  <img src="docs/point-and-speak.gif" alt="Animation: the user hovers over a Save button and circles a text box while talking, and Claude Code receives the pointer positions and an annotated screenshot." width="800">
+</p>
+
 ## Install
 
 ```
