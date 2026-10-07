@@ -1,0 +1,39 @@
+{
+  "name": "point-and-speak",
+  "version": "0.1.0",
+  "description": "Point with the mouse while you talk (built-in /voice) or type. The mod adds where the pointer was, what was under it, and a small annotated screenshot to your prompt, then deletes the files after the answer.",
+  "author": {
+    "name": "powerpratik"
+  },
+  "homepage": "https://github.com/powerpratik/point-and-speak",
+  "repository": "https://github.com/powerpratik/point-and-speak",
+  "license": "MIT",
+  "keywords": [
+    "voice",
+    "pointer",
+    "screenshot",
+    "macos",
+    "context",
+    "accessibility"
+  ],
+  "userConfig": {
+    "uvPath": {
+      "type": "string",
+      "title": "uv executable",
+      "description": "Path to uv, which runs the helper with its dependencies.",
+      "default": "uv"
+    },
+    "onlyWithPointingWords": {
+      "type": "boolean",
+      "title": "Only when you say this, that, here or circled",
+      "description": "Add pointer context only to prompts that contain a pointing word. Turn this off to add it to every prompt.",
+      "default": true
+    },
+    "screenshots": {
+      "type": "boolean",
+      "title": "Take screenshots",
+      "description": "Add an annotated screenshot and crops to the context. Turn this off to send only the spoken text, the pointer positions and the names of the controls under the pointer.",
+      "default": true
+    }
+  }
+}

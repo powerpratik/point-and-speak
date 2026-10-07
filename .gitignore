@@ -1,0 +1,4 @@
+.claude-plugin/types/
+__pycache__/
+.DS_Store
+.claude/lookat/

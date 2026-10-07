@@ -1,0 +1,15 @@
+{
+  "name": "point-and-speak",
+  "owner": {
+    "name": "powerpratik"
+  },
+  "description": "Point with the mouse while you talk to Claude Code.",
+  "plugins": [
+    {
+      "name": "point-and-speak",
+      "source": "./",
+      "description": "Adds where your mouse pointer was, what was under it, and a small annotated screenshot to a spoken or typed prompt. Toggle with /look.",
+      "category": "productivity"
+    }
+  ]
+}
